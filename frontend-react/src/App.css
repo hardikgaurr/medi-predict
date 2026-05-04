@@ -1,0 +1,351 @@
+/* ============================================================
+   MediPredict — Design System
+   Theme: Clinical Precision · Dark Medical SaaS
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap');
+
+/* ── CSS Variables ─────────────────────────────────────────── */
+:root {
+  --bg-base:        #07080f;
+  --bg-card:        rgba(15, 17, 27, 0.96);
+  --border-subtle:  rgba(255, 255, 255, 0.06);
+  --border-medium:  rgba(255, 255, 255, 0.10);
+  --border-accent:  rgba(99, 179, 237, 0.22);
+  --accent:         #63b3ed;
+  --accent-soft:    rgba(99, 179, 237, 0.10);
+  --text-primary:   #e8eaf0;
+  --text-secondary: #8892a4;
+  --text-muted:     #4a5368;
+  --ease:           cubic-bezier(0.4, 0, 0.2, 1);
+  --dur:            220ms;
+}
+
+/* ── Reset ──────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Ambient background glow */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(99,179,237,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 35% at 80% 85%,  rgba(6,182,212,0.03)  0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Page shells ────────────────────────────────────────────── */
+.app-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 48px 16px;
+}
+
+/* ── HOME WRAPPER ───────────────────────────────────────────── */
+.home-wrapper {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  animation: fadeUp 0.45s var(--ease) both;
+}
+
+/* Brand */
+.home-brand { text-align: center; }
+
+.home-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 14px;
+  border-radius: 100px;
+  background: var(--accent-soft);
+  border: 1px solid var(--border-accent);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.home-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  animation: pulse 2s infinite;
+}
+
+.app-title {
+  font-size: clamp(34px, 6vw, 46px);
+  font-weight: 600;
+  letter-spacing: -1.2px;
+  color: var(--text-primary);
+  line-height: 1.1;
+  margin: 0;
+}
+
+.app-title span { color: var(--accent); }
+
+.home-subtitle {
+  margin-top: 8px;
+  font-size: 14.5px;
+  color: var(--text-secondary);
+  font-weight: 300;
+}
+
+/* Form card */
+.card {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 22px;
+  padding: 32px;
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.04) inset,
+    0 24px 64px rgba(0,0,0,0.65),
+    0 4px 16px rgba(0,0,0,0.4);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── MUI TextField dark overrides ──────────────────────────── */
+.card .MuiFormLabel-root,
+.card .MuiInputLabel-root {
+  color: var(--text-muted) !important;
+  font-family: 'DM Sans', sans-serif !important;
+  font-size: 13.5px !important;
+}
+
+.card .MuiFormLabel-root.Mui-focused,
+.card .MuiInputLabel-root.Mui-focused {
+  color: var(--accent) !important;
+}
+
+.card .MuiOutlinedInput-root {
+  background: rgba(255,255,255,0.03) !important;
+  border-radius: 12px !important;
+  color: var(--text-primary) !important;
+  font-family: 'DM Sans', sans-serif !important;
+  font-size: 14px !important;
+}
+
+.card .MuiOutlinedInput-notchedOutline {
+  border-color: var(--border-subtle) !important;
+  transition: border-color var(--dur) var(--ease);
+}
+
+.card .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: var(--border-medium) !important;
+}
+
+.card .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--border-accent) !important;
+  border-width: 1px !important;
+}
+
+.card .MuiSelect-icon,
+.card .MuiSvgIcon-root {
+  color: var(--text-muted) !important;
+}
+
+/* MUI Menu / Popover (Select dropdown) */
+.MuiMenu-paper,
+.MuiPopover-paper {
+  background: #111520 !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.7) !important;
+}
+
+.MuiMenuItem-root {
+  font-family: 'DM Sans', sans-serif !important;
+  font-size: 13.5px !important;
+  color: var(--text-secondary) !important;
+}
+
+.MuiMenuItem-root:hover {
+  background: rgba(255,255,255,0.05) !important;
+  color: var(--text-primary) !important;
+}
+
+.MuiMenuItem-root.Mui-selected {
+  background: var(--accent-soft) !important;
+  color: var(--accent) !important;
+}
+
+/* Autocomplete chips */
+.card .MuiChip-root {
+  background: rgba(99,179,237,0.1) !important;
+  border: 1px solid rgba(99,179,237,0.22) !important;
+  color: var(--accent) !important;
+  border-radius: 8px !important;
+  font-family: 'DM Sans', sans-serif !important;
+  font-size: 12.5px !important;
+  font-weight: 500 !important;
+  height: 26px !important;
+}
+
+.card .MuiChip-deleteIcon {
+  color: rgba(99,179,237,0.45) !important;
+}
+.card .MuiChip-deleteIcon:hover {
+  color: var(--accent) !important;
+}
+
+/* Autocomplete listbox */
+.MuiAutocomplete-listbox {
+  background: #111520 !important;
+  font-family: 'DM Sans', sans-serif !important;
+  font-size: 13.5px !important;
+  color: var(--text-secondary) !important;
+}
+
+.MuiAutocomplete-option:hover,
+.MuiAutocomplete-option[aria-selected="true"] {
+  background: rgba(255,255,255,0.05) !important;
+  color: var(--text-primary) !important;
+}
+
+/* ── BUTTONS ────────────────────────────────────────────────── */
+/* Every submit-style button inside .card gets this treatment */
+.card > button,
+.primary-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: 14.5px;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  transition: all var(--dur) var(--ease);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.15) inset,
+    0 4px 20px rgba(59,130,246,0.22);
+}
+
+.card > button:hover,
+.primary-btn:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.15) inset,
+    0 8px 28px rgba(59,130,246,0.32);
+}
+
+.card > button:active,
+.primary-btn:active {
+  transform: translateY(0);
+}
+
+.card > button:disabled,
+.primary-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── ERROR ──────────────────────────────────────────────────── */
+.error {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #fc8181;
+  background: rgba(252,129,129,0.08);
+  border: 1px solid rgba(252,129,129,0.16);
+  border-radius: 10px;
+  padding: 10px 14px;
+  text-align: center;
+}
+
+/* ── REPORT PAGE ────────────────────────────────────────────── */
+.report-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 36px 16px 64px;
+}
+
+.report-header {
+  width: 100%;
+  max-width: 740px;
+  margin-bottom: 20px;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: 100px;
+  color: var(--text-secondary);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  padding: 7px 16px 7px 12px;
+  cursor: pointer;
+  transition: all var(--dur) var(--ease);
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: var(--border-medium);
+  color: var(--text-primary);
+  transform: translateX(-2px);
+}
+
+.report-content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  animation: fadeUp 0.45s var(--ease) both;
+}
+
+/* ── ANIMATIONS ─────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.35; }
+}
+
+/* ── SCROLLBAR ──────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 100px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.13); }
