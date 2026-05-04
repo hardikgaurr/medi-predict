@@ -12,9 +12,10 @@ export default function SymptomSelector({
   useEffect(() => {
     const fetchSymptoms = async () => {
       try {
-        const res = axios.get(
+        const res = await axios.get(
           "https://medi-predict-1lrk.onrender.com/symptoms",
         );
+
         if (Array.isArray(res.data) && res.data.length > 0) {
           setOptions(res.data.map((s) => s.replace(/_/g, " ")));
         }
@@ -25,6 +26,7 @@ export default function SymptomSelector({
         setLoading(false);
       }
     };
+
     fetchSymptoms();
   }, []);
 
@@ -37,7 +39,6 @@ export default function SymptomSelector({
       onChange={(_, newValue) => setSelectedSymptoms(newValue)}
       noOptionsText={loading ? "Loading symptoms…" : "No symptoms found"}
       popupIcon={null}
-      /* Override the Paper (dropdown container) */
       componentsProps={{
         paper: {
           sx: {
@@ -51,7 +52,6 @@ export default function SymptomSelector({
       }}
       sx={{
         mt: 1,
-        /* Input root */
         "& .MuiOutlinedInput-root": {
           background: "rgba(255,255,255,0.03)",
           borderRadius: "12px",
@@ -66,23 +66,19 @@ export default function SymptomSelector({
             borderWidth: "1px",
           },
         },
-        /* Label */
         "& .MuiInputLabel-root": {
           color: "#4a5368",
           fontFamily: "'DM Sans', sans-serif",
           fontSize: "13.5px",
         },
         "& .MuiInputLabel-root.Mui-focused": { color: "#63b3ed" },
-        /* Input text */
         "& input": {
           color: "#e8eaf0",
           fontFamily: "'DM Sans', sans-serif",
           fontSize: "14px",
         },
         "& input::placeholder": { color: "#4a5368", opacity: 1 },
-        /* Dropdown icon */
         "& .MuiSvgIcon-root": { color: "#4a5368" },
-        /* Listbox options */
         "& .MuiAutocomplete-listbox": {
           background: "#111520",
           fontFamily: "'DM Sans', sans-serif",
@@ -101,7 +97,6 @@ export default function SymptomSelector({
             color: "#63b3ed",
           },
         },
-        /* No options text */
         "& .MuiAutocomplete-noOptions": {
           color: "#4a5368",
           fontFamily: "'DM Sans', sans-serif",
