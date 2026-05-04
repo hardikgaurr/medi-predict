@@ -12,7 +12,9 @@ export default function SymptomSelector({
   useEffect(() => {
     const fetchSymptoms = async () => {
       try {
-        const res = await axios.get("http://127.0.0.1:5000/symptoms");
+        const res = axios.get(
+          "https://medi-predict-1lrk.onrender.com/symptoms",
+        );
         if (Array.isArray(res.data) && res.data.length > 0) {
           setOptions(res.data.map((s) => s.replace(/_/g, " ")));
         }
